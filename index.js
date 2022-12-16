@@ -111,14 +111,14 @@ function analyseFinances(data){
     var total = 0;
     //totals for average
     var averageTotal = 0;
-    var averageCount = 0;
+
     
     for(let i = 0 ; i < data.length ; i++){
 
         total = total + data[i][1];
         if( i < data.length -1){
             var diff =  data[i+1][1] - data[i][1];
-            averageCount++
+            
             averageTotal = averageTotal + diff;
 
             if(diff < 0){
@@ -133,7 +133,7 @@ function analyseFinances(data){
     }
 
     output[1][1] = total;  //assign total value of all months
-    output[2][1] = Math.round((averageTotal / averageCount) / 100) * 100; //assign value for average
+    output[2][1] = Math.round((averageTotal / (data.length -1)) / 100) * 100; //assign value for average
 
     //validate any decrease
     if(decreaseValues.length != 0){
