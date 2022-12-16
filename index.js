@@ -91,8 +91,8 @@ var array = [
     ['Total Months: ',0, '\n'],
     ['Total: $',0, '\n'],
     ['Average Change: $', 0, '\n'],
-    ['Greatest Increase in Profits: ','month', '($',0, ')', '\n'],
-    ['Greatest Decrease in Profits: ','month','($',0, ')']
+    ['Greatest Increase in Profits: ','month', ' ($',0, ')', '\n'],
+    ['Greatest Decrease in Profits: ','month',' ($',0, ')']
 ]
 //array of changes to profit
 var diffValues = [];
