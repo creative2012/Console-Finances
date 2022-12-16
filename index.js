@@ -96,7 +96,9 @@ var array = [
 ]
 
 //get profit changes and greatest decrease to profit
-function AnalyseFinances(){
+function analyseFinances(data){
+
+    array[0][1] = data.length; //total Months
 
     //array of increases in monthly profits
     var increaseValues = [];
@@ -106,54 +108,51 @@ function AnalyseFinances(){
     var decreaseMonths = [];
     //total value of all months
     var total = 0;
+    //totals for average
     var averageTotal = 0;
     var averageCount = 0
     
-    for(let i = 0 ; i < finances.length ; i++){
+    for(let i = 0 ; i < data.length ; i++){
 
-        total = total + finances[i][1];
+        total = total + data[i][1];
 
-        if( i < finances.length -1){
-            var diff =  finances[i+1][1] - finances[i][1];
+        if( i < data.length -1){
+            var diff =  data[i+1][1] - data[i][1];
 
             averageCount++
             averageTotal = averageTotal + diff;
 
             if(diff < 0){
                 decreaseValues.push(diff);
-                decreaseMonths.push(finances[i+1][0]);
+                decreaseMonths.push(data[i+1][0]);
             } else {
                 increaseValues.push(diff);
-                increaseMonths.push(finances[i+1][0]);
+                increaseMonths.push(data[i+1][0]);
             }
         }
         
     }
 
     array[1][1] = total;  //assign total value of all months
-
-    array[2][1] = Math.round((averageTotal / averageCount) / 100) * 100;
+    array[2][1] = Math.round((averageTotal / averageCount) / 100) * 100; //assign value for average
 
     //validate any decrease
     if(decreaseValues.length != 0){
-        var gd =Math.min(...decreaseValues); //greatest decreasee
+        var gd = Math.min(...decreaseValues); // assign greatest decreasee
         array[4][1] = decreaseMonths[decreaseValues.indexOf(gd)];
         array[4][2] = ' ($' + gd + ')';
     }
     //validate any increase
     if(increaseValues.length != 0){
-        var gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);//greatest increase
+        var gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);// assign greatest increase
         array[3][1] = increaseMonths[increaseValues.indexOf(gi)];
         array[3][2] = ' ($' + gi + ')';
     }
 
+    return 'Financial Analysis\n ----------------------------\n'+array.toString().replace(/,/g, '')
 
 }
 
-array[0][1] = finances.length; //total Months
-AnalyseFinances(); // greatest decrease / increase
+console.log(analyseFinances(finances)); // log to console
 
 
-
-//Log to console
-console.log('Financial Analysis\n ----------------------------\n'+array.toString().replace(/,/g, ''));
