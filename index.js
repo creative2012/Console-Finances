@@ -163,7 +163,6 @@ function getAverage(){
         total = total + diffValues[i][1];
     }
     return Math.round((total / diffValues.length) / 100) * 100;
-    // return total / diffValues.length;
 }
 
 array[0][1] = finances.length; //total Months
