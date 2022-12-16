@@ -87,7 +87,6 @@ var finances = [
 ['Feb-2017', 671099]
 ];
 
-//get profit changes and greatest decrease to profit
 function analyseFinances(data){
 
     //array to store output
@@ -112,7 +111,7 @@ function analyseFinances(data){
     var total = 0;
     //totals for average
     var averageTotal = 0;
-    var averageCount = 0
+    var averageCount = 0;
     
     for(let i = 0 ; i < data.length ; i++){
 
