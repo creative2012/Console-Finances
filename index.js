@@ -96,7 +96,7 @@ function analyseFinances(data){
         ['Average Change: $', 0, '\n'],
         ['Greatest Increase in Profits: ','No Increases for period', '', '\n'],
         ['Greatest Decrease in Profits: ','No Decreases for period','']
-    ]
+    ];
 
 
     output[0][1] = data.length; //total Months
