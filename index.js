@@ -94,8 +94,8 @@ function analyseFinances(data){
         ['Total Months: ',0, '\n'],
         ['Total: $',0, '\n'],
         ['Average Change: $', 0, '\n'],
-        ['Greatest Increase in Profits: ','No Increases for period', '', '\n'],
-        ['Greatest Decrease in Profits: ','No Decreases for period','']
+        ['Greatest Increase in Profits: ','No Increases for period', '\n'],
+        ['Greatest Decrease in Profits: ','No Decreases for period']
     ];
 
 
@@ -142,14 +142,13 @@ function analyseFinances(data){
     //validate any decrease
     if(decreaseValues.length != 0){
         const gd = Math.min(...decreaseValues); // assign greatest decreasee
-        output[4][1] = decreaseMonths[decreaseValues.indexOf(gd)];
-        output[4][2] = ' ($' + gd + ')';
+        output[4][1] = decreaseMonths[decreaseValues.indexOf(gd)] + ' ($' + gd + ')';
     }
     //validate any increase
     if(increaseValues.length != 0){
         const gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);// assign greatest increase
-        output[3][1] = increaseMonths[increaseValues.indexOf(gi)];
-        output[3][2] = ' ($' + gi + ')';
+        output[3][1] = increaseMonths[increaseValues.indexOf(gi)] + ' ($' + gi + ')';
+
     }
 
     return 'Financial Analysis\n ----------------------------\n'+output.toString().replace(/,/g, '');
