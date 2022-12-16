@@ -120,7 +120,7 @@ function assignDifferenceInProfit(){
             increaseMonths.push(diffValues[i][0]);
         }
     }
-    //validate any increase
+    //validate any decrease
     if(decreaseValues.length != 0){
         var gd =Math.min(...decreaseValues); //greatest decreasee
         array[4][1] = decreaseMonths[decreaseValues.indexOf(gd)];
@@ -128,9 +128,9 @@ function assignDifferenceInProfit(){
         array[4][3] = gd; 
         array[4][4] = ')';
     }
-    //validate any decrease
+    //validate any increase
     if(increaseValues.length != 0){
-        var gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);//greatest decreasee
+        var gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);//greatest increase
         array[3][1] = increaseMonths[increaseValues.indexOf(gi)];
         array[3][2] = ' ($';
         array[3][3] = gi; 
