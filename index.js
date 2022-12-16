@@ -106,12 +106,10 @@ function assignDifferenceInProfit(){
     //array of any decreases in monthly profits
     var decreaseValues = [];
     var decreaseMonths = [];
+    
     for(let i = 0 ; i < finances.length -1 ; i++){
         diff =  finances[i+1][1] - finances[i][1];
         diffValues.push([finances[i+1][0],diff]);
-        
-    }
-    for(let i = 0 ; i < diffValues.length; i++){
         if(diffValues[i][1] < 0){
             decreaseValues.push(diffValues[i][1]);
             decreaseMonths.push(diffValues[i][0]);
@@ -119,7 +117,9 @@ function assignDifferenceInProfit(){
             increaseValues.push(diffValues[i][1]);
             increaseMonths.push(diffValues[i][0]);
         }
+        
     }
+
     //validate any decrease
     if(decreaseValues.length != 0){
         var gd =Math.min(...decreaseValues); //greatest decreasee
