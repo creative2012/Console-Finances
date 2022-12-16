@@ -86,3 +86,91 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+//array to store output
+var array = [
+    ['Total Months: ',0, '\n'],
+    ['Total: $',0, '\n'],
+    ['Average Change: $', 0, '\n'],
+    ['Greatest Increase in Profits: ','month', '($',0, ')', '\n'],
+    ['Greatest Decrease in Profits: ','month','($',0, ')']
+]
+//array of changes to profit
+var diffValues = [];
+
+//get profit changes and greatest decrease to profit
+function assignDifferenceInProfit(){
+
+    //array of increases in monthly profits
+    var increaseValues = [];
+    var increaseMonths = [];
+    //array of any decreases in monthly profits
+    var decreaseValues = [];
+    var decreaseMonths = [];
+    for(let i = 0 ; i < finances.length -1 ; i++){
+        diff =  finances[i+1][1] - finances[i][1];
+        diffValues.push([finances[i+1][0],diff]);
+        
+    }
+    for(let i = 0 ; i < diffValues.length; i++){
+        if(diffValues[i][1] < 0){
+            decreaseValues.push(diffValues[i][1]);
+            decreaseMonths.push(diffValues[i][0]);
+        } else {
+            increaseValues.push(diffValues[i][1]);
+            increaseMonths.push(diffValues[i][0]);
+        }
+    }
+    if(decreaseValues.length === 0){
+        array[4][1] = 'No Decreases for period';
+        array[4][2] = '';
+        array[4][3] = '';
+        array[4][4] = '';
+    }
+    else {
+        var gd =Math.min(...decreaseValues); //greatest decreasee
+        array[4][1] = decreaseMonths[decreaseValues.indexOf(gd)];
+        array[4][3] = gd; 
+    }
+    if(increaseValues.length === 0){
+        array[3][1] = 'No Increases for period';
+        array[3][2] = '';
+        array[3][3] = '';
+        array[3][4] = '';
+    }
+    else {
+        var gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);//greatest decreasee
+        array[3][1] = increaseMonths[increaseValues.indexOf(gi)];
+        array[3][3] = gi; 
+    }
+
+}
+
+//get total for all months
+function getTotal(){
+
+    var total = 0;
+    for(let i = 0 ; i < finances.length ; i++){
+        total = total + finances[i][1];
+    }
+    return total;
+
+}
+//get average change
+function getAverage(){
+
+    var total = 0;
+    for(let i = 0 ; i < diffValues.length; i++){
+        total = total + diffValues[i][1];
+    }
+    return Math.round((total / diffValues.length) / 100) * 100;
+    // return total / diffValues.length;
+}
+
+array[0][1] = finances.length; //total Months
+array[1][1] = getTotal(); //total
+assignDifferenceInProfit(); // greatest decrease / increase
+array[2][1] = getAverage(); //average change
+
+
+//Log to console
+console.log('Financial Analysis\n ----------------------------\n'+array.toString().replace(/,/g, ''));
