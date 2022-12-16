@@ -86,17 +86,19 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
-//array to store output
-var array = [
-    ['Total Months: ',0, '\n'],
-    ['Total: $',0, '\n'],
-    ['Average Change: $', 0, '\n'],
-    ['Greatest Increase in Profits: ','No Increases for period', '', '\n'],
-    ['Greatest Decrease in Profits: ','No Decreases for period','']
-]
 
 //get profit changes and greatest decrease to profit
 function analyseFinances(data){
+
+    //array to store output
+    var output = [
+        ['Total Months: ',0, '\n'],
+        ['Total: $',0, '\n'],
+        ['Average Change: $', 0, '\n'],
+        ['Greatest Increase in Profits: ','No Increases for period', '', '\n'],
+        ['Greatest Decrease in Profits: ','No Decreases for period','']
+    ]
+
 
     array[0][1] = data.length; //total Months
 
@@ -115,10 +117,8 @@ function analyseFinances(data){
     for(let i = 0 ; i < data.length ; i++){
 
         total = total + data[i][1];
-
         if( i < data.length -1){
             var diff =  data[i+1][1] - data[i][1];
-
             averageCount++
             averageTotal = averageTotal + diff;
 
@@ -149,7 +149,7 @@ function analyseFinances(data){
         array[3][2] = ' ($' + gi + ')';
     }
 
-    return 'Financial Analysis\n ----------------------------\n'+array.toString().replace(/,/g, '')
+    return 'Financial Analysis\n ----------------------------\n'+output.toString().replace(/,/g, '')
 
 }
 
