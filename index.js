@@ -94,11 +94,9 @@ var array = [
     ['Greatest Increase in Profits: ','No Increases for period', '', '\n'],
     ['Greatest Decrease in Profits: ','No Decreases for period','']
 ]
-//array of changes to profit
-var diffValues = [];
 
 //get profit changes and greatest decrease to profit
-function assignDifferenceInProfit(){
+function AnalyseFinances(){
 
     //array of increases in monthly profits
     var increaseValues = [];
@@ -108,6 +106,8 @@ function assignDifferenceInProfit(){
     var decreaseMonths = [];
     //total value of all months
     var total = 0;
+    var averageTotal = 0;
+    var averageCount = 0
     
     for(let i = 0 ; i < finances.length ; i++){
 
@@ -115,20 +115,24 @@ function assignDifferenceInProfit(){
 
         if( i < finances.length -1){
             var diff =  finances[i+1][1] - finances[i][1];
-            diffValues.push([finances[i+1][0],diff]);
+
+            averageCount++
+            averageTotal = averageTotal + diff;
 
             if(diff < 0){
-                decreaseValues.push(diffValues[i][1]);
-                decreaseMonths.push(diffValues[i][0]);
+                decreaseValues.push(diff);
+                decreaseMonths.push(finances[i+1][0]);
             } else {
-                increaseValues.push(diffValues[i][1]);
-                increaseMonths.push(diffValues[i][0]);
+                increaseValues.push(diff);
+                increaseMonths.push(finances[i+1][0]);
             }
         }
         
     }
 
     array[1][1] = total;  //assign total value of all months
+
+    array[2][1] = Math.round((averageTotal / averageCount) / 100) * 100;
 
     //validate any decrease
     if(decreaseValues.length != 0){
@@ -146,19 +150,9 @@ function assignDifferenceInProfit(){
 
 }
 
-//get average change
-function getAverage(){
-
-    var total = 0;
-    for(let i = 0 ; i < diffValues.length; i++){
-        total = total + diffValues[i][1];
-    }
-    return Math.round((total / diffValues.length) / 100) * 100;
-}
-
 array[0][1] = finances.length; //total Months
-assignDifferenceInProfit(); // greatest decrease / increase
-array[2][1] = getAverage(); //average change
+AnalyseFinances(); // greatest decrease / increase
+
 
 
 //Log to console
