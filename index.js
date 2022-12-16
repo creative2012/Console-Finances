@@ -91,8 +91,8 @@ var array = [
     ['Total Months: ',0, '\n'],
     ['Total: $',0, '\n'],
     ['Average Change: $', 0, '\n'],
-    ['Greatest Increase in Profits: ','month', ' ($',0, ')', '\n'],
-    ['Greatest Decrease in Profits: ','month',' ($',0, ')']
+    ['Greatest Increase in Profits: ','No Increases for period', '','', '', '\n'],
+    ['Greatest Decrease in Profits: ','No Decreases for period','','', '']
 ]
 //array of changes to profit
 var diffValues = [];
@@ -120,28 +120,23 @@ function assignDifferenceInProfit(){
             increaseMonths.push(diffValues[i][0]);
         }
     }
-    if(decreaseValues.length === 0){
-        array[4][1] = 'No Decreases for period';
-        array[4][2] = '';
-        array[4][3] = '';
-        array[4][4] = '';
-    }
-    else {
+    //validate any increase
+    if(decreaseValues.length != 0){
         var gd =Math.min(...decreaseValues); //greatest decreasee
         array[4][1] = decreaseMonths[decreaseValues.indexOf(gd)];
+        array[4][2] = ' ($';
         array[4][3] = gd; 
+        array[4][4] = ')';
     }
-    if(increaseValues.length === 0){
-        array[3][1] = 'No Increases for period';
-        array[3][2] = '';
-        array[3][3] = '';
-        array[3][4] = '';
-    }
-    else {
+    //validate any decrease
+    if(increaseValues.length != 0){
         var gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);//greatest decreasee
         array[3][1] = increaseMonths[increaseValues.indexOf(gi)];
+        array[3][2] = ' ($';
         array[3][3] = gi; 
+        array[3][4] = ')';
     }
+
 
 }
 
