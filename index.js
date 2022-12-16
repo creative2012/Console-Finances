@@ -106,21 +106,29 @@ function assignDifferenceInProfit(){
     //array of any decreases in monthly profits
     var decreaseValues = [];
     var decreaseMonths = [];
+    //total value of all months
+    var total = 0;
     
-    for(let i = 0 ; i < finances.length -1 ; i++){
+    for(let i = 0 ; i < finances.length ; i++){
 
-        var diff =  finances[i+1][1] - finances[i][1];
-        diffValues.push([finances[i+1][0],diff]);
+        total = total + finances[i][1];
 
-        if(diff < 0){
-            decreaseValues.push(diffValues[i][1]);
-            decreaseMonths.push(diffValues[i][0]);
-        } else {
-            increaseValues.push(diffValues[i][1]);
-            increaseMonths.push(diffValues[i][0]);
+        if( i < finances.length -1){
+            var diff =  finances[i+1][1] - finances[i][1];
+            diffValues.push([finances[i+1][0],diff]);
+
+            if(diff < 0){
+                decreaseValues.push(diffValues[i][1]);
+                decreaseMonths.push(diffValues[i][0]);
+            } else {
+                increaseValues.push(diffValues[i][1]);
+                increaseMonths.push(diffValues[i][0]);
+            }
         }
         
     }
+
+    array[1][1] = total;  //assign total value of all months
 
     //validate any decrease
     if(decreaseValues.length != 0){
@@ -138,16 +146,6 @@ function assignDifferenceInProfit(){
 
 }
 
-//get total for all months
-function getTotal(){
-
-    var total = 0;
-    for(let i = 0 ; i < finances.length ; i++){
-        total = total + finances[i][1];
-    }
-    return total;
-
-}
 //get average change
 function getAverage(){
 
@@ -159,7 +157,6 @@ function getAverage(){
 }
 
 array[0][1] = finances.length; //total Months
-array[1][1] = getTotal(); //total
 assignDifferenceInProfit(); // greatest decrease / increase
 array[2][1] = getAverage(); //average change
 
