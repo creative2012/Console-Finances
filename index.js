@@ -152,7 +152,7 @@ function analyseFinances(data){
         output[3][2] = ' ($' + gi + ')';
     }
 
-    return 'Financial Analysis\n ----------------------------\n'+output.toString().replace(/,/g, '')
+    return 'Financial Analysis\n ----------------------------\n'+output.toString().replace(/,/g, '');
 
 }
 
