@@ -100,7 +100,7 @@ function analyseFinances(data){
     ]
 
 
-    array[0][1] = data.length; //total Months
+    output[0][1] = data.length; //total Months
 
     //array of increases in monthly profits
     var increaseValues = [];
@@ -133,20 +133,20 @@ function analyseFinances(data){
         
     }
 
-    array[1][1] = total;  //assign total value of all months
-    array[2][1] = Math.round((averageTotal / averageCount) / 100) * 100; //assign value for average
+    output[1][1] = total;  //assign total value of all months
+    output[2][1] = Math.round((averageTotal / averageCount) / 100) * 100; //assign value for average
 
     //validate any decrease
     if(decreaseValues.length != 0){
         var gd = Math.min(...decreaseValues); // assign greatest decreasee
-        array[4][1] = decreaseMonths[decreaseValues.indexOf(gd)];
-        array[4][2] = ' ($' + gd + ')';
+        output[4][1] = decreaseMonths[decreaseValues.indexOf(gd)];
+        output[4][2] = ' ($' + gd + ')';
     }
     //validate any increase
     if(increaseValues.length != 0){
         var gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);// assign greatest increase
-        array[3][1] = increaseMonths[increaseValues.indexOf(gi)];
-        array[3][2] = ' ($' + gi + ')';
+        output[3][1] = increaseMonths[increaseValues.indexOf(gi)];
+        output[3][2] = ' ($' + gi + ')';
     }
 
     return 'Financial Analysis\n ----------------------------\n'+output.toString().replace(/,/g, '')
