@@ -112,15 +112,19 @@ function analyseFinances(data){
     //totals for average
     var averageTotal = 0;
 
-    
+
+    //loop through array
     for(let i = 0 ; i < data.length ; i++){
 
+        //add up total of all values
         total = total + data[i][1];
         if( i < data.length -1){
             var diff =  data[i+1][1] - data[i][1];
             
+            //add up difference in profit totals
             averageTotal = averageTotal + diff;
 
+            //seperate increases and decreses in profit with months
             if(diff < 0){
                 decreaseValues.push(diff);
                 decreaseMonths.push(data[i+1][0]);
