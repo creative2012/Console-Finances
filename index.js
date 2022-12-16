@@ -137,13 +137,13 @@ function analyseFinances(data){
 
     //validate any decrease
     if(decreaseValues.length != 0){
-        var gd = Math.min(...decreaseValues); // assign greatest decreasee
+        const gd = Math.min(...decreaseValues); // assign greatest decreasee
         output[4][1] = decreaseMonths[decreaseValues.indexOf(gd)];
         output[4][2] = ' ($' + gd + ')';
     }
     //validate any increase
     if(increaseValues.length != 0){
-        var gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);// assign greatest increase
+        const gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);// assign greatest increase
         output[3][1] = increaseMonths[increaseValues.indexOf(gi)];
         output[3][2] = ' ($' + gi + ')';
     }
