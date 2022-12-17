@@ -138,15 +138,16 @@ function analyseFinances(data){
 
     output[1][1] = total;  //assign total value of all months
     output[2][1] = Math.round((averageTotal / (data.length -1)) / 100) * 100; //assign value for average
+    
 
     //validate any decrease
     if(decreaseValues.length != 0){
-        const gd = Math.min(...decreaseValues); // assign greatest decreasee
+        const gd = Math.min.apply(null, decreaseValues); // assign greatest decreasee
         output[4][1] = decreaseMonths[decreaseValues.indexOf(gd)] + ' ($' + gd + ')';
     }
     //validate any increase
     if(increaseValues.length != 0){
-        const gi = increaseValues.reduce((a, b) => Math.max(a, b), -Infinity);// assign greatest increase
+        const gi = Math.max.apply(null, increaseValues);// assign greatest increase
         output[3][1] = increaseMonths[increaseValues.indexOf(gi)] + ' ($' + gi + ')';
 
     }
