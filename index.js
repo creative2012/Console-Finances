@@ -101,11 +101,11 @@ function analyseFinances(data) {
     output[0][1] = data.length; //total Months
 
     //array of increases in monthly profits
-    var increaseValues = [];
-    var increaseMonths = [];
+    var iValues = [];
+    var iMonths = [];
     //array of any decreases in monthly profits
-    var decreaseValues = [];
-    var decreaseMonths = [];
+    var dValues = [];
+    var dMonths = [];
     //total value of all months
     var total = 0;
     //totals for average
@@ -124,11 +124,11 @@ function analyseFinances(data) {
 
             //seperate increases and decreses in profit with months
             if (diff < 0) {
-                decreaseValues.push(diff);
-                decreaseMonths.push(data[i + 1][0]);
+                dValues.push(diff);
+                dMonths.push(data[i + 1][0]);
             } else {
-                increaseValues.push(diff);
-                increaseMonths.push(data[i + 1][0]);
+                iValues.push(diff);
+                iMonths.push(data[i + 1][0]);
             }
         }
     }
@@ -137,14 +137,16 @@ function analyseFinances(data) {
     output[2][1] = Math.round((averageTotal / (data.length - 1)) / 100) * 100; //assign value for average
 
     //validate any decrease
-    if (decreaseValues.length != 0) {
-        const gd = Math.min.apply(null, decreaseValues); // assign greatest decreasee
-        output[4][1] = decreaseMonths[decreaseValues.indexOf(gd)] + ' ($' + gd + ')';
+    if (dValues.length != 0) {
+        // assign greatest decreasee
+        const gd = Math.min.apply(null, dValues); 
+        output[4][1] = dMonths[dValues.indexOf(gd)] + ' ($' + gd + ')';
     }
     //validate any increase
-    if (increaseValues.length != 0) {
-        const gi = Math.max.apply(null, increaseValues);// assign greatest increase
-        output[3][1] = increaseMonths[increaseValues.indexOf(gi)] + ' ($' + gi + ')';
+    if (iValues.length != 0) {
+        // assign greatest increase
+        const gi = Math.max.apply(null, iValues);
+        output[3][1] = iMonths[iValues.indexOf(gi)] + ' ($' + gi + ')';
     }
 
     return 'Financial Analysis\n ----------------------------\n' + output.toString().replace(/,/g, '');
