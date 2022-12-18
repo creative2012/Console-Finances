@@ -134,7 +134,7 @@ function analyseFinances(data) {
     }
 
     output[1][1] = total;  //assign total value of all months
-    output[2][1] = Math.round((averageTotal / (data.length - 1)) / 100) * 100; //assign value for average
+    output[2][1] = Math.round((averageTotal / (data.length - 1))) ; //assign value for average
 
     //validate any decrease
     if (dValues.length != 0) {
