@@ -115,14 +115,12 @@ function analyseFinances(data) {
     for (let i = 0; i < data.length; i++) {
 
         //add up total of all values
-        total = total + data[i][1];
+        total += data[i][1];
         if (i < data.length - 1) {
             var diff = data[i + 1][1] - data[i][1];
-
             //add up difference in profit totals
-            averageTotal = averageTotal + diff;
-
-            //seperate increases and decreses in profit with months
+            averageTotal += diff;
+            //seperate increases and decreses in profit with months 
             if (diff < 0) {
                 dValues.push(diff);
                 dMonths.push(data[i + 1][0]);
@@ -138,18 +136,22 @@ function analyseFinances(data) {
 
     //validate any decrease
     if (dValues.length != 0) {
-        // assign greatest decreasee
-        const gd = Math.min.apply(null, dValues); 
+        // assign greatest decrease
+        const gd = Math.min(...dValues); 
         output[4][1] = dMonths[dValues.indexOf(gd)] + ' ($' + gd + ')';
     }
     //validate any increase
     if (iValues.length != 0) {
         // assign greatest increase
-        const gi = Math.max.apply(null, iValues);
+        const gi = Math.max(...iValues);
         output[3][1] = iMonths[iValues.indexOf(gi)] + ' ($' + gi + ')';
     }
+    // display output in HTML
+    const div = document.getElementById('output');
+    div.innerHTML =  'Financial Analysis<br/>----------------------------<br/>' + output.toString().replace(/,/g, '').replace(/\n/g, '<br/>');
 
-    return 'Financial Analysis\n ----------------------------\n' + output.toString().replace(/,/g, '');
+    //return to display in console
+    return 'Financial Analysis\n----------------------------\n' + output.toString().replace(/,/g, '');
 
 }
 
