@@ -148,7 +148,7 @@ function analyseFinances(data) {
     }
     // display output in HTML
     const div = document.getElementById('output');
-    div.innerHTML =  'Financial Analysis<br/>----------------------------<br/>' + output.toString().replace(/,/g, '').replace(/\n/g, '<br/>');
+    div.innerHTML =  '<b>Financial Analysis</b><br/>----------------------------<br/>' + output.toString().replace(/,/g, '').replace(/\n/g, '<br/>');
 
     //return to display in console
     return 'Financial Analysis\n----------------------------\n' + output.toString().replace(/,/g, '');
