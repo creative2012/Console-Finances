@@ -1,0 +1,16 @@
+body{
+    background-color: #0257aa;
+    
+}
+#output{
+    margin:20px auto; 
+    width: 500px;
+    height: 500px;
+    color: white;
+    background-image: url("../images/header.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-top: 250px;
+    
+}
